@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigitalWithMati</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(0,255,255,.08), transparent 25%),
+        radial-gradient(circle at 80% 70%, rgba(255,0,255,.08), transparent 25%),
+        linear-gradient(180deg, #050505 0%, #0b0b0f 100%);
+      color:#fff;
+      overflow-x:hidden;
+    }
+
+    /* INTRO DOORS */
+    .intro{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      background:#020202;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .door{
+      position:absolute;
+      top:0;
+      width:50%;
+      height:100%;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)),
+        linear-gradient(135deg, #111 0%, #050505 100%);
+      border:1px solid rgba(255,255,255,.04);
+      box-shadow:
+        inset 0 0 30px rgba(255,255,255,.03),
+        0 0 30px rgba(0,255,255,.08);
+      transition:transform 1.4s ease, box-shadow .4s ease;
+      z-index:1;
+    }
+
+    .door.left{
+      left:0;
+      border-right:1px solid rgba(0,255,255,.2);
+    }
+
+    .door.right{
+      right:0;
+      border-left:1px solid rgba(255,0,255,.2);
+    }
+
+    .door::before{
+      content:"";
+      position:absolute;
+      top:0;
+      bottom:0;
+      width:2px;
+      background:linear-gradient(180deg, transparent, rgba(0,255,255,.4), transparent);
+      filter:blur(1px);
+    }
+
+    .door.left::before{
+      right:18px;
+    }
+
+    .door.right::before{
+      left:18px;
+      background:linear-gradient(180deg, transparent, rgba(255,0,255,.4), transparent);
+    }
+
+    .intro-content{
+      position:relative;
+      z-index:3;
+      text-align:center;
+      padding:20px;
+      max-width:700px;
+    }
+
+    .intro-title{
+      font-size:52px;
+      line-height:1.05;
+      color:#fff;
+      text-shadow:
+        0 0 12px rgba(255,255,255,.15),
+        0 0 24px rgba(0,255,255,.15);
+      margin-bottom:16px;
+    }
+
+    .intro-title span{
+      color:#00f7ff;
+      text-shadow:
+        0 0 10px rgba(0,247,255,.5),
+        0 0 25px rgba(0,247,255,.25);
+    }
+
+    .intro-sub{
+      color:#cfcfcf;
+      font-size:18px;
+      line-height:1.6;
+      margin-bottom:28px;
+    }
+
+    .enter-btn{
+      display:inline-block;
+      padding:15px 34px;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:16px;
+      color:#fff;
+      background:linear-gradient(90deg, #00eaff, #ff00d9);
+      box-shadow:
+        0 0 18px rgba(0,255,255,.25),
+        0 0 18px rgba(255,0,255,.18);
+      transition:transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+      cursor:pointer;
+      border:none;
+    }
+
+    .enter-btn:hover{
+      transform:translateY(-2px) scale(1.03);
+      box-shadow:
+        0 0 24px rgba(0,255,255,.35),
+        0 0 24px rgba(255,0,255,.25);
+    }
+
+    .intro.open .left{
+      transform:translateX(-100%);
+    }
+
+    .intro.open .right{
+      transform:translateX(100%);
+    }
+
+    .intro.open .intro-content{
+      opacity:0;
+      transition:opacity .4s ease;
+    }
+
+    /* MAIN CONTENT */
+    .container{
+      width:min(1000px, 92%);
+      margin:0 auto;
+      padding:90px 0 80px;
+    }
+
+    .hero{
+      padding-top:30px;
+      margin-bottom:42px;
+      text-align:left;
+    }
+
+    .brand-logo{
+      width:220px;
+      max-width:70%;
+      display:block;
+      margin-bottom:22px;
+      filter:drop-shadow(0 0 18px rgba(0,255,255,.16));
+    }
+
+    h1{
+      font-size:clamp(38px, 7vw, 72px);
+      line-height:1.02;
+      color:#00f7ff;
+      text-shadow:
+        0 0 14px rgba(0,247,255,.55),
+        0 0 34px rgba(0,247,255,.18);
+      margin-bottom:18px;
+      max-width:900px;
+    }
+
+    .hero p{
+      font-size:clamp(18px, 2vw, 24px);
+      color:#e8e8e8;
+      line-height:1.6;
+      margin-bottom:26px;
+      max-width:840px;
+    }
+
+    .cta-row{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:30px;
+    }
+
+    .button{
+      display:inline-block;
+      padding:14px 26px;
+      background:linear-gradient(90deg,#00eaff,#ff00d9);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border-radius:12px;
+      box-shadow:
+        0 0 16px rgba(0,255,255,.20),
+        0 0 16px rgba(255,0,255,.18);
+      transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+
+    .button:hover{
+      transform:translateY(-2px) scale(1.03);
+      box-shadow:
+        0 0 26px rgba(0,255,255,.35),
+        0 0 26px rgba(255,0,255,.30);
+      filter:brightness(1.06);
+    }
+
+    .button.alt{
+      background:transparent;
+      border:1px solid rgba(0,255,255,.35);
+      color:#cfffff;
+    }
+
+    section{
+      margin-top:42px;
+    }
+
+    h2{
+      font-size:clamp(28px, 4vw, 40px);
+      color:#ff2ed9;
+      text-shadow:
+        0 0 10px rgba(255,46,217,.4),
+        0 0 22px rgba(255,46,217,.18);
+      margin-bottom:18px;
+    }
+
+    .grid{
+      display:grid;
+      gap:18px;
+    }
+
+    .box{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      padding:24px;
+      border-radius:16px;
+      border:1px solid rgba(0,255,255,.18);
+      box-shadow:
+        0 0 0 rgba(0,255,255,0),
+        inset 0 0 15px rgba(255,255,255,.015);
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .box:hover{
+      transform:translateY(-6px);
+      border-color:rgba(0,255,255,.45);
+      box-shadow:
+        0 0 22px rgba(0,255,255,.18),
+        0 0 36px rgba(0,255,255,.08),
+        inset 0 0 14px rgba(255,255,255,.02);
+      background:linear-gradient(180deg, rgba(0,255,255,.05), rgba(255,255,255,.02));
+    }
+
+    .box strong{
+      display:block;
+      font-size:22px;
+      margin-bottom:8px;
+      color:#fff;
+    }
+
+    .box p{
+      color:#d8d8d8;
+      line-height:1.7;
+      font-size:18px;
+    }
+
+    .contact-card{
+      margin-top:14px;
+      display:grid;
+      gap:14px;
+    }
+
+    .contact-mini{
+      display:block;
+      padding:16px 18px;
+      border-radius:14px;
+      text-decoration:none;
+      color:#fff;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      transition:transform .2s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .contact-mini:hover{
+      transform:translateY(-4px);
+      border-color:rgba(255,0,217,.35);
+      box-shadow:0 0 20px rgba(255,0,217,.12);
+    }
+
+    .contact-mini span{
+      display:block;
+      color:#a9a9a9;
+      margin-top:5px;
+      font-size:15px;
+    }
+
+    footer{
+      padding:40px 0 15px;
+      color:#8d8d8d;
+      font-size:14px;
+      text-align:center;
+    }
+
+    @media (max-width: 700px){
+      .intro-title{
+        font-size:36px;
+      }
+      .intro-sub{
+        font-size:16px;
+      }
+      .box strong{
+        font-size:20px;
+      }
+      .box p{
+        font-size:16px;
+      }
+      .container{
+        padding-top:70px;
+      }
+      .brand-logo{
+        width:180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="intro" id="intro">
+    <div class="door left"></div>
+    <div class="door right"></div>
+
+    <div class="intro-content">
+      <h2 class="intro-title">Welcome to my <span>digital office</span></h2>
+      <p class="intro-sub">
+        Websites, subscriptions, payments, automation, and growth systems built to perform.
+      </p>
+      <button class="enter-btn" onclick="openDoors()">ENTER</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="hero">
+      <img src="logo.png" alt="DigitalWithMati logo" class="brand-logo">
+
+      <h1>I Build Systems That Generate Revenue</h1>
+      <p>
+        Websites, subscriptions, payments, automation — all working together.
+      </p>
+
+      <div class="cta-row">
+        <a href="https://wa.me/5492235960733" class="button" target="_blank">Contact me on WhatsApp</a>
+        <a href="https://t.me/digitalwithmati" class="button alt" target="_blank">Message me on Telegram</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>What I Do</h2>
+      <div class="grid">
+        <div class="box">
+          <strong>Digital Systems & Monetization</strong>
+          <p>Subscription platforms, payment integrations, automated delivery, and membership systems.</p>
+        </div>
+
+        <div class="box">
+          <strong>Automation & Optimization</strong>
+          <p>Telegram bots, workflow automation, funnel optimization, and conversion-focused design.</p>
+        </div>
+
+        <div class="box">
+          <strong>Technical Implementation</strong>
+          <p>WordPress setup, plugin integration, backend fixes, performance improvements, and structural optimization.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Real Work</h2>
+      <div class="grid">
+        <div class="box">
+          <p>Built subscription systems with automated access and payment validation.</p>
+        </div>
+
+        <div class="box">
+          <p>Implemented crypto payment flows replacing unreliable processors.</p>
+        </div>
+
+        <div class="box">
+          <p>Automated content delivery through Telegram workflows.</p>
+        </div>
+
+        <div class="box">
+          <p>Optimized UI and structure to increase user engagement and sales.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Let’s Work</h2>
+      <p style="font-size:20px; line-height:1.7; color:#dfdfdf; margin-bottom:18px;">
+        If your system needs to sell better, run smoother, or automate — I can help.
+      </p>
+
+      <div class="contact-card">
+        <a class="contact-mini" href="https://wa.me/5492235960733" target="_blank">
+          WhatsApp
+          <span>Fastest way to reach me directly</span>
+        </a>
+
+        <a class="contact-mini" href="https://t.me/digitalwithmati" target="_blank">
+          Telegram
+          <span>Great for projects, bots, and workflow questions</span>
+        </a>
+
+        <a class="contact-mini" href="mailto:digitalwithmati@gmail.com">
+          Email
+          <span>For detailed project requests</span>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      Portfolio / DigitalWithMati
+    </footer>
+  </div>
+
+  <script>
+    function openDoors() {
+      const intro = document.getElementById('intro');
+      intro.classList.add('open');
+
+      setTimeout(() => {
+        intro.style.display = 'none';
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
