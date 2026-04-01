@@ -25,7 +25,10 @@
       overflow-x:hidden;
     }
 
-    /* INTRO DOORS */
+    a{
+      color:inherit;
+    }
+
     .intro{
       position:fixed;
       inset:0;
@@ -87,7 +90,7 @@
       z-index:3;
       text-align:center;
       padding:20px;
-      max-width:700px;
+      max-width:760px;
     }
 
     .intro-title{
@@ -151,9 +154,8 @@
       transition:opacity .4s ease;
     }
 
-    /* MAIN CONTENT */
     .container{
-      width:min(1000px, 92%);
+      width:min(1100px, 92%);
       margin:0 auto;
       padding:90px 0 80px;
     }
@@ -165,11 +167,24 @@
     }
 
     .brand-logo{
-      width:220px;
-      max-width:70%;
+      width:240px;
+      max-width:75%;
       display:block;
-      margin-bottom:22px;
+      margin-bottom:24px;
       filter:drop-shadow(0 0 18px rgba(0,255,255,.16));
+    }
+
+    .eyebrow{
+      display:inline-block;
+      margin-bottom:16px;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(0,255,255,.18);
+      background:rgba(255,255,255,.02);
+      color:#cfffff;
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
     }
 
     h1{
@@ -180,7 +195,7 @@
         0 0 14px rgba(0,247,255,.55),
         0 0 34px rgba(0,247,255,.18);
       margin-bottom:18px;
-      max-width:900px;
+      max-width:950px;
     }
 
     .hero p{
@@ -188,14 +203,14 @@
       color:#e8e8e8;
       line-height:1.6;
       margin-bottom:26px;
-      max-width:840px;
+      max-width:920px;
     }
 
     .cta-row{
       display:flex;
       gap:14px;
       flex-wrap:wrap;
-      margin-bottom:30px;
+      margin-bottom:28px;
     }
 
     .button{
@@ -226,8 +241,36 @@
       color:#cfffff;
     }
 
+    .hero-metrics{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:16px;
+      margin-top:18px;
+    }
+
+    .metric{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid rgba(0,255,255,.12);
+      border-radius:16px;
+      padding:18px;
+      box-shadow:inset 0 0 15px rgba(255,255,255,.01);
+    }
+
+    .metric strong{
+      display:block;
+      font-size:26px;
+      color:#fff;
+      margin-bottom:6px;
+    }
+
+    .metric span{
+      color:#bfbfbf;
+      font-size:14px;
+      line-height:1.5;
+    }
+
     section{
-      margin-top:42px;
+      margin-top:54px;
     }
 
     h2{
@@ -239,9 +282,25 @@
       margin-bottom:18px;
     }
 
+    .section-lead{
+      font-size:18px;
+      line-height:1.8;
+      color:#d9d9d9;
+      max-width:900px;
+      margin-bottom:20px;
+    }
+
     .grid{
       display:grid;
       gap:18px;
+    }
+
+    .grid-2{
+      grid-template-columns:repeat(2, minmax(0,1fr));
+    }
+
+    .grid-3{
+      grid-template-columns:repeat(3, minmax(0,1fr));
     }
 
     .box{
@@ -273,14 +332,50 @@
     .box strong{
       display:block;
       font-size:22px;
-      margin-bottom:8px;
+      margin-bottom:10px;
       color:#fff;
     }
 
     .box p{
       color:#d8d8d8;
+      line-height:1.75;
+      font-size:17px;
+    }
+
+    .list{
+      list-style:none;
+      display:grid;
+      gap:10px;
+      margin-top:4px;
+    }
+
+    .list li{
+      color:#d8d8d8;
       line-height:1.7;
-      font-size:18px;
+      padding-left:18px;
+      position:relative;
+    }
+
+    .list li::before{
+      content:"•";
+      position:absolute;
+      left:0;
+      color:#00eaff;
+    }
+
+    .stack-wrap{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .chip{
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      color:#f0f0f0;
+      font-size:14px;
     }
 
     .contact-card{
@@ -313,11 +408,25 @@
       font-size:15px;
     }
 
+    .footer-cta{
+      margin-top:24px;
+    }
+
     footer{
       padding:40px 0 15px;
       color:#8d8d8d;
       font-size:14px;
       text-align:center;
+    }
+
+    @media (max-width: 900px){
+      .hero-metrics{
+        grid-template-columns:repeat(2, 1fr);
+      }
+      .grid-2,
+      .grid-3{
+        grid-template-columns:1fr;
+      }
     }
 
     @media (max-width: 700px){
@@ -337,7 +446,10 @@
         padding-top:70px;
       }
       .brand-logo{
-        width:180px;
+        width:190px;
+      }
+      .hero-metrics{
+        grid-template-columns:1fr;
       }
     }
   </style>
@@ -351,72 +463,221 @@
     <div class="intro-content">
       <h2 class="intro-title">Welcome to my <span>digital office</span></h2>
       <p class="intro-sub">
-        Websites, subscriptions, payments, automation, and growth systems built to perform.
+        Landing pages, websites, automations, membership systems, bots, payments, and multi-platform digital solutions.
       </p>
       <button class="enter-btn" onclick="openDoors()">ENTER</button>
     </div>
   </div>
 
   <div class="container">
+
     <section class="hero">
       <img src="logo.png" alt="DigitalWithMati logo" class="brand-logo">
 
-      <h1>I Build Systems That Generate Revenue</h1>
+      <span class="eyebrow">Multiplatform Digital Builder</span>
+
+      <h1>I Build Digital Systems That Look Better, Work Better, and Sell Better</h1>
+
       <p>
-        Websites, subscriptions, payments, automation — all working together.
+        I create and improve digital products across websites, automation systems, membership platforms, bots, UI/UX, and conversion-focused experiences. From landing pages to payment flows to business tools, I build solutions that actually move things forward.
       </p>
 
       <div class="cta-row">
         <a href="https://wa.me/5492235960733" class="button" target="_blank">Contact me on WhatsApp</a>
         <a href="https://t.me/digitalwithmati" class="button alt" target="_blank">Message me on Telegram</a>
       </div>
+
+      <div class="hero-metrics">
+        <div class="metric">
+          <strong>Web</strong>
+          <span>Landing pages, site improvements, WordPress, front-end structure and conversion work.</span>
+        </div>
+        <div class="metric">
+          <strong>Automation</strong>
+          <span>Telegram bots, workflows, lead flows, response systems, and smart process simplification.</span>
+        </div>
+        <div class="metric">
+          <strong>Systems</strong>
+          <span>Membership logic, payment flows, internal tools, business solutions, and operational fixes.</span>
+        </div>
+        <div class="metric">
+          <strong>Multi-Platform</strong>
+          <span>Solutions adapted to different stacks, tools, languages, and real business needs.</span>
+        </div>
+      </div>
     </section>
 
     <section>
-      <h2>What I Do</h2>
-      <div class="grid">
+      <h2>What I Build</h2>
+      <p class="section-lead">
+        I do not work in just one narrow lane. I build and improve complete digital environments: pages, automations, systems, business flows, and tools that help brands look more professional and operate more efficiently.
+      </p>
+
+      <div class="grid grid-3">
         <div class="box">
-          <strong>Digital Systems & Monetization</strong>
-          <p>Subscription platforms, payment integrations, automated delivery, and membership systems.</p>
+          <strong>Landing Pages & Websites</strong>
+          <p>Modern landing pages, redesigns, homepage improvements, sections with stronger structure, cleaner messaging, and better conversion flow.</p>
         </div>
 
         <div class="box">
-          <strong>Automation & Optimization</strong>
-          <p>Telegram bots, workflow automation, funnel optimization, and conversion-focused design.</p>
+          <strong>Automation & Bots</strong>
+          <p>Telegram bots, workflow automation, welcome systems, quick navigation menus, and process simplification for businesses and projects.</p>
         </div>
 
         <div class="box">
-          <strong>Technical Implementation</strong>
-          <p>WordPress setup, plugin integration, backend fixes, performance improvements, and structural optimization.</p>
+          <strong>Business Systems</strong>
+          <p>Membership logic, access systems, payment integrations, product/service flows, and custom solutions for digital operations.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Core Services</h2>
+      <div class="grid grid-2">
+        <div class="box">
+          <strong>Website & Front-End Work</strong>
+          <ul class="list">
+            <li>Landing pages for brands, products, and services</li>
+            <li>Homepage upgrades and section redesigns</li>
+            <li>WordPress fixes, visual improvements, and layout corrections</li>
+            <li>UX/UI refinement for cleaner, more premium interfaces</li>
+            <li>Conversion-focused page structure</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <strong>Automation & Technical Systems</strong>
+          <ul class="list">
+            <li>Telegram bot creation and menu flows</li>
+            <li>Workflow automation and process simplification</li>
+            <li>Payment flow structure and digital service logic</li>
+            <li>Membership and gated-access system support</li>
+            <li>Custom ideas adapted to the real needs of a project</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Platforms & Stack</h2>
+      <p class="section-lead">
+        I work across multiple environments depending on what the project needs. The goal is not to force one tool for everything — it is to use the right tool to solve the problem.
+      </p>
+
+      <div class="box">
+        <div class="stack-wrap">
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Python</span>
+          <span class="chip">WordPress</span>
+          <span class="chip">Telegram Bots</span>
+          <span class="chip">Render</span>
+          <span class="chip">GitHub</span>
+          <span class="chip">Landing Pages</span>
+          <span class="chip">UI / UX</span>
+          <span class="chip">Automation</span>
+          <span class="chip">Payment Flows</span>
+          <span class="chip">Membership Systems</span>
+          <span class="chip">Business Tools</span>
+          <span class="chip">Multi-Platform Solutions</span>
         </div>
       </div>
     </section>
 
     <section>
       <h2>Real Work</h2>
-      <div class="grid">
+      <div class="grid grid-2">
         <div class="box">
-          <p>Built subscription systems with automated access and payment validation.</p>
+          <strong>Revenue-Focused Builds</strong>
+          <p>Built digital structures designed to improve presentation, reduce friction, and increase conversions across websites and service flows.</p>
         </div>
 
         <div class="box">
-          <p>Implemented crypto payment flows replacing unreliable processors.</p>
+          <strong>Automation Workflows</strong>
+          <p>Created Telegram-based navigation and contact systems that help clients reach information faster and interact more clearly.</p>
         </div>
 
         <div class="box">
-          <p>Automated content delivery through Telegram workflows.</p>
+          <strong>Platform Improvements</strong>
+          <p>Improved site sections, user-facing interfaces, and structural details to make projects feel stronger, more polished, and more useful.</p>
         </div>
 
         <div class="box">
-          <p>Optimized UI and structure to increase user engagement and sales.</p>
+          <strong>Custom Solutions</strong>
+          <p>Worked on tailored solutions involving websites, operational logic, digital access systems, payment ideas, and internal business needs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Selected Projects</h2>
+      <p class="section-lead">
+        A selection of real work focused on improving digital presence, user experience, automation, and operational flow.
+      </p>
+
+      <div class="grid grid-3">
+        <div class="box">
+          <strong>Membership Platform Optimization</strong>
+          <p>Improved structure and user flow for a digital platform with gated content, access logic, membership flow, and content organization. Focused on usability, clarity, and smoother navigation.</p>
+        </div>
+
+        <div class="box">
+          <strong>Telegram Automation System</strong>
+          <p>Built a Telegram-based system to simplify communication, provide structured navigation, connect users with key information, and create a more professional first-touch experience.</p>
+        </div>
+
+        <div class="box">
+          <strong>Landing Page & Conversion Improvements</strong>
+          <p>Designed and improved landing sections with stronger layout, better hierarchy, cleaner messaging, and a more polished user journey focused on engagement and action.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Why Work With Me</h2>
+      <div class="grid grid-3">
+        <div class="box">
+          <strong>Flexible Thinking</strong>
+          <p>I adapt to the project. Not every problem needs the same platform, language, or structure.</p>
+        </div>
+
+        <div class="box">
+          <strong>Execution Focus</strong>
+          <p>I am not just designing ideas — I work toward usable, visible, functioning results.</p>
+        </div>
+
+        <div class="box">
+          <strong>Business Mindset</strong>
+          <p>I care about clarity, presentation, conversions, operations, and making digital systems work better in real life.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Process</h2>
+      <div class="grid grid-3">
+        <div class="box">
+          <strong>1. Understand</strong>
+          <p>I look at what the project needs, what is broken, what is weak, and what should improve first.</p>
+        </div>
+
+        <div class="box">
+          <strong>2. Build</strong>
+          <p>I create or refine the solution using the right mix of design, logic, structure, and implementation.</p>
+        </div>
+
+        <div class="box">
+          <strong>3. Improve</strong>
+          <p>I adjust for clarity, polish, usability, and stronger performance so the result feels complete.</p>
         </div>
       </div>
     </section>
 
     <section>
       <h2>Let’s Work</h2>
-      <p style="font-size:20px; line-height:1.7; color:#dfdfdf; margin-bottom:18px;">
-        If your system needs to sell better, run smoother, or automate — I can help.
+      <p class="section-lead">
+        If you need a better landing page, a stronger website section, a smarter workflow, a cleaner user experience, or a digital system that actually helps your business move forward — I can help.
       </p>
 
       <div class="contact-card">
@@ -427,13 +688,23 @@
 
         <a class="contact-mini" href="https://t.me/digitalwithmati" target="_blank">
           Telegram
-          <span>Great for projects, bots, and workflow questions</span>
+          <span>Great for projects, bots, workflow ideas, and direct communication</span>
         </a>
 
         <a class="contact-mini" href="mailto:digitalwithmati@gmail.com">
           Email
-          <span>For detailed project requests</span>
+          <span>For detailed project requests and long-term work</span>
         </a>
+
+        <a class="contact-mini" href="https://fuzzylogicarg.github.io/PORTFOLIO/" target="_blank">
+          Portfolio
+          <span>See the live DigitalWithMati page</span>
+        </a>
+      </div>
+
+      <div class="footer-cta cta-row">
+        <a href="https://wa.me/5492235960733" class="button" target="_blank">Start a Project</a>
+        <a href="https://fuzzylogicarg.github.io/PORTFOLIO/" class="button alt" target="_blank">View Portfolio</a>
       </div>
     </section>
 
