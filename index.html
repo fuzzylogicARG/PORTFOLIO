@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>digitalwithmati</title>
+<title>DigitalWithMati</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-font-family:Arial;
+font-family:Arial, sans-serif;
 background:linear-gradient(180deg,#050505,#0a0a0f);
 color:#fff;
 }
@@ -17,7 +18,10 @@ color:#fff;
 /* INTRO */
 .intro{
 position:fixed;
-inset:0;
+top:0;
+left:0;
+width:100%;
+height:100%;
 background:#000;
 display:flex;
 justify-content:center;
@@ -28,19 +32,44 @@ overflow:hidden;
 
 .door{
 position:absolute;
+top:0;
 width:50%;
 height:100%;
 background:#111;
 transition:1.2s;
+z-index:2;
 }
 
-.left{left:0;border-right:1px solid cyan;}
-.right{right:0;border-left:1px solid magenta;}
+.left{
+left:0;
+border-right:1px solid cyan;
+}
 
-.intro.open .left{transform:translateX(-100%);}
-.intro.open .right{transform:translateX(100%);}
+.right{
+right:0;
+border-left:1px solid magenta;
+}
 
-.intro-content{text-align:center;}
+.intro.open .left{
+transform:translateX(-100%);
+}
+
+.intro.open .right{
+transform:translateX(100%);
+}
+
+.intro-content{
+text-align:center;
+position:relative;
+z-index:10;
+padding:20px;
+}
+
+.intro-content h2{
+font-size:36px;
+margin-bottom:20px;
+text-shadow:0 0 10px rgba(255,255,255,.2);
+}
 
 .enter-btn{
 padding:15px 30px;
@@ -50,6 +79,8 @@ border-radius:10px;
 color:#fff;
 font-weight:bold;
 cursor:pointer;
+font-size:16px;
+box-shadow:0 0 20px rgba(0,255,255,.2);
 }
 
 /* MAIN */
@@ -84,11 +115,11 @@ transform:translateY(-5px);
 box-shadow:0 0 20px cyan;
 }
 
-/* BOTONES */
 .button{
 display:inline-block;
 padding:12px 25px;
 margin-top:15px;
+margin-right:10px;
 background:linear-gradient(90deg,cyan,magenta);
 border-radius:10px;
 color:#000;
@@ -96,7 +127,6 @@ text-decoration:none;
 font-weight:bold;
 }
 
-/* CONTACT */
 .contact-mini{
 display:block;
 margin-top:10px;
@@ -113,78 +143,43 @@ transition:.3s;
 box-shadow:0 0 15px magenta;
 }
 </style>
+
 </head>
 
 <body>
 
-<!-- INTRO -->
 <div class="intro" id="intro">
 <div class="door left"></div>
 <div class="door right"></div>
 
 <div class="intro-content">
 <h2>Welcome to my digital office</h2>
-<br>
 <button class="enter-btn" onclick="openDoors()">ENTER</button>
 </div>
 </div>
 
-<!-- MAIN -->
 <div class="container">
 
-<!-- LOGO -->
-<img src="logo.png" style="width:180px; margin-bottom:20px;">
-
-<h1>I Build Systems That Generate Revenue</h1>
-
-<p>Websites, subscriptions, payments, and automation — all working together.</p>
-
-<a href="https://wa.me/5492235960733" class="button" target="_blank">Contact me on WhatsApp</a>
-
-<a href="https://t.me/digitalwithmati" class="button" target="_blank">Telegram</a>
+<h1>DigitalWithMati</h1>
 
 <h2>What I Do</h2>
-
 <div class="box">
-<b>Digital Systems & Monetization</b><br>
-Subscription platforms, payment integrations, automated delivery.
+I build landing pages, improve websites, fix problems and help businesses look more professional online.
 </div>
 
+<h2>Services</h2>
 <div class="box">
-<b>Automation & Optimization</b><br>
-Telegram bots, workflows, funnel optimization.
+• Landing Pages (modern, clean, high-converting)<br>
+• Website Fixes (WordPress, layouts, bugs)<br>
+• UI/UX improvements<br>
+• Automation ideas (bots, flows)
 </div>
 
+<h2>Contact</h2>
 <div class="box">
-<b>Technical Implementation</b><br>
-WordPress setup, plugin integration, backend fixes.
-</div>
-
-<h2>Real Work</h2>
-
-<div class="box">Built subscription systems with automated access.</div>
-<div class="box">Implemented crypto payment flows.</div>
-<div class="box">Automated content delivery with Telegram.</div>
-<div class="box">Optimized UI and conversion.</div>
-
-<h2>Let’s Work</h2>
-
-<p>If your system needs to sell better, run smoother, or automate — I can help.</p>
-
-<div>
-
-<a class="contact-mini" href="https://wa.me/5492235960733" target="_blank">
-WhatsApp
-</a>
-
-<a class="contact-mini" href="https://t.me/digitalwithmati" target="_blank">
-Telegram
-</a>
-
-<a class="contact-mini" href="mailto:digitalwithmati@gmail.com">
-Email
-</a>
-
+<a href="https://t.me/digitalwithmati" class="contact-mini">Telegram: @digitalwithmati</a>
+<a href="mailto:digitalwithmati@gmail.com" class="contact-mini">Email: digitalwithmati@gmail.com</a>
+<a href="https://wa.me/542235960733" class="contact-mini">WhatsApp: +54 223 596 0733</a>
 </div>
 
 </div>
@@ -193,7 +188,7 @@ Email
 function openDoors(){
 document.getElementById("intro").classList.add("open");
 
-setTimeout(()=>{
+setTimeout(function(){
 document.getElementById("intro").style.display="none";
 },1200);
 }
